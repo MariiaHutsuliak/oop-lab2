@@ -10,7 +10,7 @@ private:
     const string bruschetta;
     const string cheese;
     const string tartar;
-
+    static int numberOfAppetizers; // статичне поле для підрахунку кількості закусок
 
 public:
     Appetizers(const string newBruschetta = "None",
@@ -18,7 +18,7 @@ public:
                const string newTartar = "None");
     ~Appetizers();
 
-
+    static int getNumberOfAppetizers();
 
 };
 
