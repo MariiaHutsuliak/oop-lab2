@@ -3,7 +3,13 @@
 
 
 Bar::Bar(string newName, double newPrice, string newSpecial)
-        : name{newName}, price{newPrice}, special{newSpecial} {}
+        : name{newName}, price{newPrice}, special{newSpecial} {} // список ініціалізації
+
+Bar::Bar(const Bar &other)
+        : name{other.name}, price{other.price}, special{other.special} {}
+Bar::~Bar(){}
+
+
 
 
 void Bar::display() {

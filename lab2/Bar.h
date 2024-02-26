@@ -14,8 +14,11 @@ public:
     void display();
     void updateBar(string newName, double newPrice, string newSpecial);
 
-    Bar(string newName = "None", double newPrice = 0, string newSpecial = "None");
+    Bar(string newName = "None", double newPrice = 0, string newSpecial = "None"); // конструктор з параметрами
+
+    Bar(const Bar &other);
     ~Bar();
+
 };
 
 
