@@ -8,9 +8,11 @@ private:
     bool isAvailable;
     double price;
 
-private:
+public:
     Delivery();
-    Delivery(bool available, double deliveryPrice);
+    Delivery(bool available, double deliveryPrice); //перевантажений конструктор
+    Delivery(Delivery&& other) noexcept;
+
     ~Delivery();
 
     void setAvailability(bool available);
