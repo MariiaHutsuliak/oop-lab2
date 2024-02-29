@@ -11,9 +11,9 @@ private:
 public:
     Delivery();
     Delivery(bool available, double deliveryPrice); //перевантажений конструктор
-    Delivery(Delivery&& other) noexcept;
-
     ~Delivery();
+
+    void operator+(const Delivery &rhs); //бінарний оператор
 
     void setAvailability(bool available);
     void displayInfo();
