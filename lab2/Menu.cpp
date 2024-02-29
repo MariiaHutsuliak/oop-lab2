@@ -14,15 +14,17 @@ Menu::Menu(string new_name, double new_price, double new_weight)
         :name{new_name}, price{new_price}, weight{new_weight} {}
 // делегування і ініціалізація
 
+Menu::Menu(Menu &&other) noexcept
+        : name{other.name}, price{other.price},weight{other.weight}{}
 
 Menu::~Menu(){}
 
 
-void Menu::display() {
-    std::cout << "Menu:\n";
-    std::cout << "Name: " << this -> name << endl;
-    std::cout << "Price: " << this -> price << " USD" << endl;
-    std::cout << "Weight: " << this -> weight << " g" << endl;
+void Menu::display() const{
+    cout << "Menu:\n";
+    cout << "Name: " << name << endl;
+    cout << "Price: " << price << " USD" << endl;
+    cout << "Weight: " << weight << " g" << endl;
 }
 
 ostream &operator <<(ostream &os, Menu &dish) {
@@ -40,10 +42,4 @@ istream &operator >>(istream &is, Menu &dish){
     cout << "Enter weight of the dish: ";
     is >> dish.weight;
     return is;
-}
-
-void Menu::updateItem(string &newName, double newPrice, double newWeight) {
-    name = newName;
-    price = newPrice;
-    weight = newWeight;
 }

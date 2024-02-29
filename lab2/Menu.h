@@ -12,7 +12,7 @@ private:
     double weight;
 
 public:
-    void display();
+    void display() const;
     void updateItem(string &newName, double newPrice, double newWeight);
 
     Menu(); // конструктор за замовчуванням
@@ -22,6 +22,8 @@ public:
 
     friend ostream &operator <<(ostream &os, Menu &dish);
     friend istream &operator >>(istream &is, Menu &dish);
+
+    Menu(Menu &&other) noexcept;
 
     ~Menu();
 
