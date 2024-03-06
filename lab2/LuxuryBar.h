@@ -12,6 +12,8 @@ public:
 
     LuxuryBar(const LuxuryBar &other);
 
+    LuxuryBar& operator=(const LuxuryBar& other);
+
     ~LuxuryBar();
 
     void display();
