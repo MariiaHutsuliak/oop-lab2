@@ -26,6 +26,10 @@ void HealthyMenu::display() const {
     Menu::display();
     cout << "Calories: " << calories << endl;
     cout << "Fat Content: " << fatContent << endl;
+    cout << "Displaying information about healthy menu" << endl;
+}
+void HealthyMenu::describeDish(){
+    cout << "Healthy dish from the menu." << endl;
 }
 
 ostream &operator <<(ostream &os, HealthyMenu &dish) {

@@ -3,7 +3,7 @@
 #include "Menu.h"
 using namespace std;
 
-class HealthyMenu: public Menu {
+class HealthyMenu final: public Menu {
 public:
     double calories;
     double fatContent;
@@ -17,10 +17,11 @@ public:
 
     HealthyMenu(HealthyMenu &&other) noexcept;
 
-    ~HealthyMenu();
+    virtual ~HealthyMenu();
 
 
-    void display() const;
+    virtual void display() const override;
+    virtual void describeDish() override final;
 
     friend ostream &operator <<(ostream &os, HealthyMenu &dish);
     friend istream &operator >>(istream &is, HealthyMenu &dish);
