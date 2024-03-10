@@ -6,14 +6,13 @@
 using namespace std;
 
 class Menu {
-private:
+public:
     string name;
     double price;
     double weight;
 
-public:
-    void display() const;
-    void updateItem(string &newName, double newPrice, double newWeight);
+    virtual void display() const;
+    virtual void describeDish();
 
     Menu(); // конструктор за замовчуванням
     Menu(string new_name); // перевантажений конструктор
@@ -25,7 +24,7 @@ public:
 
     Menu(Menu &&other) noexcept;
 
-    ~Menu();
+    virtual ~Menu();
 
 };
 

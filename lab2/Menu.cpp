@@ -15,7 +15,7 @@ Menu::Menu(string new_name, double new_price, double new_weight)
 // делегування і ініціалізація
 
 Menu::Menu(Menu &&other) noexcept
-        : name{other.name}, price{other.price},weight{other.weight}{}
+        :name{other.name}, price{other.price},weight{other.weight}{}
 
 Menu::~Menu(){}
 
@@ -25,6 +25,10 @@ void Menu::display() const{
     cout << "Name: " << name << endl;
     cout << "Price: " << price << " USD" << endl;
     cout << "Weight: " << weight << " g" << endl;
+    cout << "Displaying information about menu" << endl;
+}
+void Menu::describeDish(){
+    cout << "Basic dish from the menu." << endl;
 }
 
 ostream &operator <<(ostream &os, Menu &dish) {
