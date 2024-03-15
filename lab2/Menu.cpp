@@ -20,7 +20,7 @@ Menu::Menu(Menu &&other) noexcept
 Menu::~Menu(){}
 
 
-void Menu::display() const{
+void Menu::display(){
     cout << "Menu:\n";
     cout << "Name: " << name << endl;
     cout << "Price: " << price << " USD" << endl;
@@ -29,6 +29,10 @@ void Menu::display() const{
 }
 void Menu::describeDish(){
     cout << "Basic dish from the menu." << endl;
+}
+
+void Menu::confirmOrder() {
+    cout << "Confirming order for " << name << " from the menu." << endl;
 }
 
 ostream &operator <<(ostream &os, Menu &dish) {

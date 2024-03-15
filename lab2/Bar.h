@@ -1,18 +1,17 @@
 #ifndef LAB2_BAR_H
 #define LAB2_BAR_H
-
+#include "Orderable.h"
 #include <string>
 using namespace std;
 
-class Bar {
-private:
+class Bar: public Orderable {
+public:
     string name;
     double price;
     string special;
 
-public:
-    void display();
-    void updateBar(string newName, double newPrice, string newSpecial);
+    void display() override;
+    void confirmOrder() override;
 
     Bar(string newName = "None", double newPrice = 0, string newSpecial = "None"); // конструктор з параметрами
 

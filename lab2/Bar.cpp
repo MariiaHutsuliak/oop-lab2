@@ -10,17 +10,14 @@ Bar::Bar(const Bar &other)
 Bar::~Bar(){}
 
 
-
-
 void Bar::display() {
     cout << "Bar Information:\n";
     cout << "Name: " << name << endl;
     cout << "Price: " << price << " USD" << endl;
     cout << "Special: " << special << endl;
+    cout << "Displaying information about the bar" << endl;
 }
 
-void Bar::updateBar(string newName, double newPrice, string newSpecial) {
-    name = newName;
-    price = newPrice;
-    special = newSpecial;
+void Bar::confirmOrder() {
+    cout << "Confirming order for " << name << " from the bar." << endl;
 }

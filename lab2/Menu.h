@@ -4,15 +4,17 @@
 #include <vector>
 #include <string>
 using namespace std;
+#include "Orderable.h"
 
-class Menu {
+class Menu: public Orderable{
 public:
     string name;
     double price;
     double weight;
 
-    virtual void display() const;
+    virtual void display() override;
     virtual void describeDish();
+    virtual void confirmOrder() override;
 
     Menu(); // конструктор за замовчуванням
     Menu(string new_name); // перевантажений конструктор

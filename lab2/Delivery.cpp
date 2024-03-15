@@ -16,8 +16,11 @@ void Delivery::operator+(const Delivery &rhs){
 void Delivery::setAvailability(bool available) {
     isAvailable = available;
 }
-void Delivery::displayInfo() {
+void Delivery::display() {
     cout << "Delivery Information:\n";
     cout << "Available: " << (isAvailable ? "Yes" : "No") << endl;
     cout << "Price: " << price << " USD" << endl;
+}
+void Delivery::confirmOrder() {
+    cout << "Confirm delivery." << endl;
 }
