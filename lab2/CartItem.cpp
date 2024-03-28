@@ -1,5 +1,4 @@
-//
-// Created by user on 28.03.2024.
-//
-
 #include "CartItem.h"
+CartItem::CartItem(const std::string& _name, double _price) : name(_name), price(_price) {}
+
+CartItem::~CartItem() {}
