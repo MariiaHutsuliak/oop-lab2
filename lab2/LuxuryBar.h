@@ -1,6 +1,7 @@
 #ifndef LAB2_LUXURYBAR_H
 #define LAB2_LUXURYBAR_H
 #include "Bar.h"
+#include <fstream>
 
 class LuxuryBar: public Bar {
 public:
@@ -14,11 +15,16 @@ public:
 
     LuxuryBar& operator=(const LuxuryBar& other);
 
+    friend ostream &operator <<(ostream &os, LuxuryBar &cocktail);
+    friend istream &operator >>(istream &is, LuxuryBar &cocktail);
+
     ~LuxuryBar();
 
-    void display();
-
+    void displayLuxuryBar(const vector<shared_ptr<LuxuryBar>>& luxuryBarMenu);
+    void addLuxuryBarItem(vector<shared_ptr<LuxuryBar>>& luxuryBarMenu);
+    void changeLuxuryBarItem(vector<shared_ptr<LuxuryBar>>& luxuryBarMenu);
 };
+
 
 
 #endif //LAB2_LUXURYBAR_H

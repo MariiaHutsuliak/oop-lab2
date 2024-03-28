@@ -19,26 +19,36 @@ Menu::Menu(Menu &&other) noexcept
 
 Menu::~Menu(){}
 
-
-void Menu::display(){
+void Menu::displayMenu(const vector<shared_ptr<Menu>>& menu) {
     cout << "Menu:\n";
-    cout << "Name: " << name << endl;
-    cout << "Price: " << price << " USD" << endl;
-    cout << "Weight: " << weight << " g" << endl;
-    cout << "Displaying information about menu" << endl;
+    for (size_t i = 0; i < menu.size(); ++i) {
+        cout << i + 1 << ". " << *menu[i] << endl;
+    }
 }
-void Menu::describeDish(){
-    cout << "Basic dish from the menu." << endl;
+void Menu::addMenuItem(vector<shared_ptr<Menu>>& menu) {
+    auto newItem = make_unique<Menu>();
+    cin >> *newItem;
+    menu.push_back(move(newItem));
+    cout << "New item added to the menu:\n" << *menu.back() << endl;
 }
-
-void Menu::confirmOrder() {
-    cout << "Confirming order for " << name << " from the menu." << endl;
+void Menu::changeMenuItem(vector<shared_ptr<Menu>>& menu) {
+    displayMenu(menu);
+    int choice;
+    cout << "Enter the number of the item you want to change: ";
+    cin >> choice;
+    if (choice >= 1 || choice << menu.size()) {
+        cout << "Enter the new details for the item:" << endl;
+        cin >> *menu[choice - 1];
+        cout << "Menu item changed:" << endl << *menu[choice - 1] << endl;
+    } else {
+        cout << "Invalid choice." << endl;
+    }
 }
 
 ostream &operator <<(ostream &os, Menu &dish) {
-   os << "Dish name: " << dish.name << endl
-   << "Dish price: " << dish.price << endl
-   << "Dish weight: " << dish.weight << endl;
+   os << "Name: " << dish.name <<  endl
+   << "Price: " << dish.price << " USD" << endl
+   << "Weight: " << dish.weight <<" g" << endl;
    return os;
 };
 

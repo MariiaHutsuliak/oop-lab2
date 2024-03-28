@@ -1,20 +1,28 @@
 #ifndef LAB2_BAR_H
 #define LAB2_BAR_H
-#include "Orderable.h"
+
 #include <string>
+#include <memory>
+#include <vector>
+#include <fstream>
 using namespace std;
 
-class Bar: public Orderable {
+class Bar {
 public:
     string name;
     double price;
     string special;
 
-    void display() override;
-    void confirmOrder() override;
+    void displayBar(const vector<shared_ptr<Bar>>& barMenu);
+    void addBarItem(vector<shared_ptr<Bar>>& barMenu);
+    void changeBarItem(vector<shared_ptr<Bar>>& barMenu);
 
     Bar(string newName = "None", double newPrice = 0, string newSpecial = "None"); // конструктор з параметрами
 
+    friend ostream &operator <<(ostream &os, Bar &cocktail);
+    friend istream &operator >>(istream &is, Bar &cocktail);
+
+    
     Bar(const Bar &other);
     ~Bar();
 

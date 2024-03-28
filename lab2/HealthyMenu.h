@@ -17,11 +17,13 @@ public:
 
     HealthyMenu(HealthyMenu &&other) noexcept;
 
+
     virtual ~HealthyMenu();
 
 
-    virtual void display() const override;
-    virtual void describeDish() override final;
+    void displayHealthyMenu(const vector<shared_ptr<HealthyMenu>>& healthyMenu);
+    void addHealthyMenuItem(vector<shared_ptr<HealthyMenu>>& healthyMenu);
+    void changeHealthyMenuItem(vector<shared_ptr<HealthyMenu>>& healthyMenu);
 
     friend ostream &operator <<(ostream &os, HealthyMenu &dish);
     friend istream &operator >>(istream &is, HealthyMenu &dish);

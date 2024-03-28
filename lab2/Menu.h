@@ -4,17 +4,17 @@
 #include <vector>
 #include <string>
 using namespace std;
-#include "Orderable.h"
+#include <memory>
 
-class Menu: public Orderable{
+class Menu {
 public:
     string name;
     double price;
     double weight;
 
-    virtual void display() override;
-    virtual void describeDish();
-    virtual void confirmOrder() override;
+    void displayMenu(const vector<shared_ptr<Menu>>& menu);
+    void addMenuItem(vector<shared_ptr<Menu>>& menu);
+    void changeMenuItem(vector<shared_ptr<Menu>>& menu);
 
     Menu(); // конструктор за замовчуванням
     Menu(string new_name); // перевантажений конструктор
@@ -25,7 +25,6 @@ public:
     friend istream &operator >>(istream &is, Menu &dish);
 
     Menu(Menu &&other) noexcept;
-
     virtual ~Menu();
 
 };
