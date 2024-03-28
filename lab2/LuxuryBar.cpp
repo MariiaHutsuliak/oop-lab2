@@ -1,7 +1,6 @@
 #include "LuxuryBar.h"
 #include "Bar.h"
 #include <iostream>
-#include <fstream>
 using namespace std;
 
 LuxuryBar::LuxuryBar(string newName, double newPrice, string newSpecial, bool newPremiumQuality, string newOrigin)
@@ -11,14 +10,12 @@ LuxuryBar::LuxuryBar(const LuxuryBar &other)
         : Bar{other}, premiumQuality{other.premiumQuality}, origin{other.origin}{}
 
 LuxuryBar& LuxuryBar::operator=(const LuxuryBar& other) {
-    // викликаємо оператор присвоєння батьківського класу
     Bar::operator=(other);
 
-    // присвоюємо дані з іншого об'єкта класу LuxuryBar
     premiumQuality = other.premiumQuality;
     origin = other.origin;
 
-    return *this; // в операторі присвоєння повертає посилання на об'єкт, для якого був викликаний цей оператор,дозволяє декілька операцій присвоєння один за одним
+    return *this;
 }
 
 istream& operator>>(istream& is, LuxuryBar& cocktail) {
@@ -45,7 +42,6 @@ ostream& operator<<(ostream& os, LuxuryBar& cocktail) {
 }
 LuxuryBar::~LuxuryBar(){};
 
-
 void LuxuryBar::displayLuxuryBar(const vector<shared_ptr<LuxuryBar>>& luxuryBarMenu) {
     cout << "Luxury Bar Menu:\n";
     for (size_t i = 0; i < luxuryBarMenu.size(); ++i) {
@@ -58,16 +54,4 @@ void LuxuryBar::addLuxuryBarItem(vector<shared_ptr<LuxuryBar>>& luxuryBarMenu) {
     luxuryBarMenu.push_back(move(newItem));
     cout << "New item added to the luxury bar menu:\n" << *luxuryBarMenu.back() << endl;
 }
-void LuxuryBar::changeLuxuryBarItem(vector<shared_ptr<LuxuryBar>>& luxuryBarMenu) {
-    displayLuxuryBar(luxuryBarMenu);
-    int choice;
-    cout << "Enter the number of the item you want to change: ";
-    cin >> choice;
-    if (choice >= 1 && choice <= static_cast<int>(luxuryBarMenu.size())) {
-        cout << "Enter the new details for the item:" << endl;
-        cin >> *luxuryBarMenu[choice - 1];
-        cout << "Luxury bar item changed:" << endl << *luxuryBarMenu[choice - 1] << endl;
-    } else {
-        cout << "Invalid choice." << endl;
-    }
-}
+

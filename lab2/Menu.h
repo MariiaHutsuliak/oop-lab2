@@ -14,10 +14,9 @@ public:
 
     void displayMenu(const vector<shared_ptr<Menu>>& menu);
     void addMenuItem(vector<shared_ptr<Menu>>& menu);
-    void changeMenuItem(vector<shared_ptr<Menu>>& menu);
 
-    Menu(); // конструктор за замовчуванням
-    Menu(string new_name); // перевантажений конструктор
+    Menu();
+    Menu(string new_name);
     Menu(string new_name, double new_price);
     Menu(string new_name, double new_price, double new_weight);
 

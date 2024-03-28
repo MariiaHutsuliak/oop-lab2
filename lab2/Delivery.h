@@ -1,8 +1,7 @@
 #ifndef LAB2_DELIVERY_H
 #define LAB2_DELIVERY_H
-#include "Orderable.h"
 
-class Delivery : public Orderable{
+class Delivery {
 
 private:
     bool isAvailable;
@@ -16,8 +15,7 @@ public:
     void operator+(const Delivery &rhs); //бінарний оператор
 
     void setAvailability(bool available);
-    virtual void display() override;
-    virtual void confirmOrder() override;
+    void display();
 };
 
 

@@ -23,20 +23,6 @@ void Bar::addBarItem(vector<shared_ptr<Bar>>& barMenu) {
     cout << "New item added to the bar menu:\n" << *barMenu.back() << endl;
 }
 
-void Bar::changeBarItem(vector<shared_ptr<Bar>>& barMenu) {
-    displayBar(barMenu);
-    int choice;
-    cout << "Enter the number of the item you want to change: ";
-    cin >> choice;
-    if (choice >= 1 && choice <= static_cast<int>(barMenu.size())) {
-        cout << "Enter the new details for the item:" << endl;
-        cin >> *barMenu[choice - 1];
-        cout << "Bar item changed:" << endl << *barMenu[choice - 1] << endl;
-    } else {
-        cout << "Invalid choice." << endl;
-    }
-}
-
 istream& operator>>(istream& is, Bar& cocktail) {
     cout << "Enter name: ";
     is >> cocktail.name;

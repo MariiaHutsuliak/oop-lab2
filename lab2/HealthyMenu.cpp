@@ -35,27 +35,12 @@ void HealthyMenu::addHealthyMenuItem(vector<shared_ptr<HealthyMenu>>& healthyMen
     cout << "New item added to the healthy menu:\n" << *healthyMenu.back() << endl;
 }
 
-void HealthyMenu::changeHealthyMenuItem(vector<shared_ptr<HealthyMenu>>& healthyMenu) {
-    displayHealthyMenu(healthyMenu);
-    int choice;
-    cout << "Enter the number of the item you want to change: ";
-    cin >> choice;
-    if (choice >= 1 && choice <= static_cast<int>(healthyMenu.size())) {
-        cout << "Enter the new details for the item:" << endl;
-        cin >> *healthyMenu[choice - 1];
-        cout << "Healthy menu item changed:" << endl << *healthyMenu[choice - 1] << endl;
-    } else {
-        cout << "Invalid choice." << endl;
-    }
-}
-
-
 ostream &operator <<(ostream &os, HealthyMenu &dish) {
-    os << "Dish name: " << dish.name << endl
-       << "Dish price: " << dish.price << endl
-       << "Dish weight: " << dish.weight << endl
-       << "Dish calories: " << dish.calories << endl
-       << "Dish fat content: " << dish.fatContent << endl;
+    os << "Name: " << dish.name << endl
+       << "Price: " << dish.price << endl
+       << "Weight: " << dish.weight << endl
+       << "Calories: " << dish.calories << endl
+       << "Fat content: " << dish.fatContent << endl;
     return os;
 };
 

@@ -17,10 +17,12 @@ void Delivery::setAvailability(bool available) {
     isAvailable = available;
 }
 void Delivery::display() {
+    cout << "---------------------------------------" << endl;
     cout << "Delivery Information:\n";
     cout << "Available: " << (isAvailable ? "Yes" : "No") << endl;
     cout << "Price: " << price << " USD" << endl;
+    cout << "Currently there is no delivery person, if you are interested in "
+            "this vacancy please contact: 0506729181" << endl;
+    cout << "---------------------------------------" << endl;
 }
-void Delivery::confirmOrder() {
-    cout << "Confirm delivery." << endl;
-}
+

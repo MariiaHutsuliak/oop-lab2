@@ -31,19 +31,6 @@ void Menu::addMenuItem(vector<shared_ptr<Menu>>& menu) {
     menu.push_back(move(newItem));
     cout << "New item added to the menu:\n" << *menu.back() << endl;
 }
-void Menu::changeMenuItem(vector<shared_ptr<Menu>>& menu) {
-    displayMenu(menu);
-    int choice;
-    cout << "Enter the number of the item you want to change: ";
-    cin >> choice;
-    if (choice >= 1 || choice << menu.size()) {
-        cout << "Enter the new details for the item:" << endl;
-        cin >> *menu[choice - 1];
-        cout << "Menu item changed:" << endl << *menu[choice - 1] << endl;
-    } else {
-        cout << "Invalid choice." << endl;
-    }
-}
 
 ostream &operator <<(ostream &os, Menu &dish) {
    os << "Name: " << dish.name <<  endl

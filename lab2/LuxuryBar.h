@@ -22,7 +22,7 @@ public:
 
     void displayLuxuryBar(const vector<shared_ptr<LuxuryBar>>& luxuryBarMenu);
     void addLuxuryBarItem(vector<shared_ptr<LuxuryBar>>& luxuryBarMenu);
-    void changeLuxuryBarItem(vector<shared_ptr<LuxuryBar>>& luxuryBarMenu);
+
 };
 
 
