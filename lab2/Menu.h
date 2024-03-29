@@ -12,8 +12,9 @@ public:
     double price;
     double weight;
 
-    void displayMenu(const vector<shared_ptr<Menu>>& menu);
-    void addMenuItem(vector<shared_ptr<Menu>>& menu);
+    void displayMenu(const vector<unique_ptr<Menu>>& menu);
+    void addMenuItem(vector<unique_ptr<Menu>>& menu);
+    static void changeMenuItem(vector<unique_ptr<Menu>>& menu);
 
     Menu();
     Menu(string new_name);

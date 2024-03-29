@@ -22,17 +22,30 @@ HealthyMenu::HealthyMenu(HealthyMenu &&other) noexcept
         : Menu{move(other)}, calories{other.calories}, fatContent{other.fatContent} {}
 HealthyMenu::~HealthyMenu() {}
 
-void HealthyMenu::displayHealthyMenu(const vector<shared_ptr<HealthyMenu>>& healthyMenu) {
+void HealthyMenu::displayHealthyMenu(const vector<unique_ptr<HealthyMenu>>& healthyMenu) {
     cout << "Healthy Menu:\n";
     for (size_t i = 0; i < healthyMenu.size(); ++i) {
         cout << i + 1 << ". " << *healthyMenu[i] << endl;
     }
 }
-void HealthyMenu::addHealthyMenuItem(vector<shared_ptr<HealthyMenu>>& healthyMenu) {
-    auto newItem = make_unique<HealthyMenu>();
-    cin >> *newItem;
-    healthyMenu.push_back(move(newItem));
+void HealthyMenu::addHealthyMenuItem(vector<unique_ptr<HealthyMenu>>& healthyMenu) {
+    unique_ptr<HealthyMenu> healthyPos = make_unique<HealthyMenu>();
+    cin >> *healthyPos;
+    healthyMenu.push_back(move(healthyPos));
     cout << "New item added to the healthy menu:\n" << *healthyMenu.back() << endl;
+}
+void HealthyMenu::changeHealthyMenuItem(vector<unique_ptr<HealthyMenu>>& menu) {
+
+    int choice;
+    cout << "Enter the number of the item you want to change: ";
+    cin >> choice;
+    if (choice >= 1 && choice <= menu.size()) {
+        cout << "Enter the new details for the item:" << endl;
+        cin >> *menu[choice - 1];
+        cout << "Healthy menu item changed:" << endl << *menu[choice - 1] << endl;
+    } else {
+        cout << "Invalid choice." << endl;
+    }
 }
 
 ostream &operator <<(ostream &os, HealthyMenu &dish) {

@@ -13,8 +13,9 @@ public:
     double price;
     string special;
 
-    void displayBar(const vector<shared_ptr<Bar>>& barMenu);
-    void addBarItem(vector<shared_ptr<Bar>>& barMenu);
+    void displayBar(const vector<unique_ptr<Bar>>& barMenu);
+    void addBarItem(vector<unique_ptr<Bar>>& barMenu);
+    static void changeBarItem(vector<unique_ptr<Bar>>& barMenu);
 
     Bar(string newName = "None", double newPrice = 0, string newSpecial = "None"); // конструктор з параметрами
 

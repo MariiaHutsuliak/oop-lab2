@@ -20,8 +20,9 @@ public:
 
     ~LuxuryBar();
 
-    void displayLuxuryBar(const vector<shared_ptr<LuxuryBar>>& luxuryBarMenu);
-    void addLuxuryBarItem(vector<shared_ptr<LuxuryBar>>& luxuryBarMenu);
+    void displayLuxuryBar(const vector<unique_ptr<LuxuryBar>>& luxuryBarMenu);
+    void addLuxuryBarItem(vector<unique_ptr<LuxuryBar>>& luxuryBarMenu);
+    static void changeLuxuryBarItem(vector<unique_ptr<LuxuryBar>>& luxuryBarMenu);
 
 };
 

@@ -42,16 +42,28 @@ ostream& operator<<(ostream& os, LuxuryBar& cocktail) {
 }
 LuxuryBar::~LuxuryBar(){};
 
-void LuxuryBar::displayLuxuryBar(const vector<shared_ptr<LuxuryBar>>& luxuryBarMenu) {
+void LuxuryBar::displayLuxuryBar(const vector<unique_ptr<LuxuryBar>>& luxuryBarMenu) {
     cout << "Luxury Bar Menu:\n";
     for (size_t i = 0; i < luxuryBarMenu.size(); ++i) {
         cout << i + 1 << ". " << *luxuryBarMenu[i] << endl;
     }
 }
-void LuxuryBar::addLuxuryBarItem(vector<shared_ptr<LuxuryBar>>& luxuryBarMenu) {
-    auto newItem = make_unique<LuxuryBar>();
-    cin >> *newItem;
-    luxuryBarMenu.push_back(move(newItem));
+void LuxuryBar::addLuxuryBarItem(vector<unique_ptr<LuxuryBar>>& luxuryBarMenu) {
+    unique_ptr<LuxuryBar> luxuryPos = make_unique<LuxuryBar>();
+    cin >> *luxuryPos;
+    luxuryBarMenu.push_back(move(luxuryPos));
     cout << "New item added to the luxury bar menu:\n" << *luxuryBarMenu.back() << endl;
+}
+void LuxuryBar::changeLuxuryBarItem(vector<unique_ptr<LuxuryBar>>& luxuryBarMenu) {
+    int choice;
+    cout << "Enter the number of the item you want to change: ";
+    cin >> choice;
+    if (choice >= 1 && choice <= luxuryBarMenu.size()) {
+        cout << "Enter the new details for the item:" << endl;
+        cin >> *luxuryBarMenu[choice - 1];
+        cout << "Luxury bar item changed:" << endl << *luxuryBarMenu[choice - 1] << endl;
+    } else {
+        cout << "Invalid choice." << endl;
+    }
 }
 

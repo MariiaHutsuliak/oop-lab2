@@ -19,17 +19,29 @@ Menu::Menu(Menu &&other) noexcept
 
 Menu::~Menu(){}
 
-void Menu::displayMenu(const vector<shared_ptr<Menu>>& menu) {
+void Menu::displayMenu(const vector<unique_ptr<Menu>>& menu) {
     cout << "Menu:\n";
     for (size_t i = 0; i < menu.size(); ++i) {
         cout << i + 1 << ". " << *menu[i] << endl;
     }
 }
-void Menu::addMenuItem(vector<shared_ptr<Menu>>& menu) {
-    auto newItem = make_unique<Menu>();
-    cin >> *newItem;
-    menu.push_back(move(newItem));
+void Menu::addMenuItem(vector<unique_ptr<Menu>>& menu) {
+    unique_ptr<Menu> menuPos = make_unique<Menu>();
+    cin >> *menuPos;
+    menu.emplace_back(move(menuPos));
     cout << "New item added to the menu:\n" << *menu.back() << endl;
+}
+void Menu::changeMenuItem(vector<unique_ptr<Menu>>& menu) {
+    int choice;
+    cout << "Enter the number of the item you want to change: ";
+    cin >> choice;
+    if (choice >= 1 || choice << menu.size()) {
+        cout << "Enter the new details for the item:" << endl;
+        cin >> *menu[choice - 1];
+        cout << "Menu item changed:" << endl << *menu[choice - 1] << endl;
+    } else {
+        cout << "Invalid choice." << endl;
+    }
 }
 
 ostream &operator <<(ostream &os, Menu &dish) {

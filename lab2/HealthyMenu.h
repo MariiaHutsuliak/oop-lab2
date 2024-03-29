@@ -19,8 +19,9 @@ public:
 
     virtual ~HealthyMenu();
 
-    void displayHealthyMenu(const vector<shared_ptr<HealthyMenu>>& healthyMenu);
-    void addHealthyMenuItem(vector<shared_ptr<HealthyMenu>>& healthyMenu);
+    void displayHealthyMenu(const vector<unique_ptr<HealthyMenu>>& healthyMenu);
+    void addHealthyMenuItem(vector<unique_ptr<HealthyMenu>>& healthyMenu);
+    static void changeHealthyMenuItem(vector<unique_ptr<HealthyMenu>>& menu);
 
     friend ostream &operator <<(ostream &os, HealthyMenu &dish);
     friend istream &operator >>(istream &is, HealthyMenu &dish);
