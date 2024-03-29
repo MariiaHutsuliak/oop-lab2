@@ -10,8 +10,8 @@ using namespace std;
 #include "ShoppingCart.h"
 #include "CartItem.h"
 
-void saveMenuToFile(const vector<shared_ptr<Menu>>& menu) {
-    ofstream file("menu1.txt", ios::app);
+void saveMenuToFile(const vector<unique_ptr<Menu>>& menu, ofstream::openmode state) {
+    ofstream file("menu1.txt",state);
     if (!file.is_open()) {
         cerr << "Error: Unable to open file." << endl;
         return;
@@ -20,7 +20,7 @@ void saveMenuToFile(const vector<shared_ptr<Menu>>& menu) {
         file << item->name << " " << item->price << " " << item->weight << endl;
     }
 }
-void loadMenuFromFile(vector<shared_ptr<Menu>>& menu) {
+void loadMenuFromFile(vector<unique_ptr<Menu>>& menu) {
     ifstream file("menu1.txt");
     if (!file.is_open()) {
         cerr << "Error: Unable to open file." << endl;
@@ -34,32 +34,32 @@ void loadMenuFromFile(vector<shared_ptr<Menu>>& menu) {
     }
 }
 
-void saveHealthyMenuToFile(const vector<shared_ptr<HealthyMenu>>& menu) {
-    ofstream file("healthyMenu.txt", ios::app);
+void saveHealthyMenuToFile(const vector<unique_ptr<HealthyMenu>>& healthyMenu, ofstream::openmode state) {
+    ofstream file("healthyMenu.txt", state);
     if (!file.is_open()) {
         cerr << "Error: Unable to open file." << endl;
         return;
     }
-    for (const auto& item : menu) {
+    for (const auto& item : healthyMenu) {
         file << item->name << " " << item->price << " " << item->weight << " " << item->calories << " " << item->fatContent << endl;
     }
 }
-void loadHealthyMenuFromFile(vector<shared_ptr<HealthyMenu>>& menu) {
+void loadHealthyMenuFromFile(vector<unique_ptr<HealthyMenu>>& healthyMenu) {
     ifstream file("healthyMenu.txt");
     if (!file.is_open()) {
         cerr << "Error: Unable to open file." << endl;
         return;
     }
-    menu.clear();
+    healthyMenu.clear();
     string name;
     double price, weight, calories, fatContent;
     while (file >> name >> price >> weight >> calories >> fatContent) {
-        menu.push_back(make_unique<HealthyMenu>(name, price, weight, calories, fatContent));
+        healthyMenu.push_back(make_unique<HealthyMenu>(name, price, weight, calories, fatContent));
     }
 }
 
-void saveBarToFile(const vector<shared_ptr<Bar>>& barMenu) {
-    ofstream file("bar_menu.txt", ios::app);
+void saveBarToFile(const vector<unique_ptr<Bar>>& barMenu, ofstream::openmode state) {
+    ofstream file("bar_menu.txt", state);
     if (!file.is_open()) {
         cerr << "Error: Unable to open file." << endl;
         return;
@@ -69,7 +69,7 @@ void saveBarToFile(const vector<shared_ptr<Bar>>& barMenu) {
         file << item->name << " " << item->price << " " << item->special << endl;
     }
 }
-void loadBarFromFile(vector<shared_ptr<Bar>>& barMenu) {
+void loadBarFromFile(vector<unique_ptr<Bar>>& barMenu) {
     ifstream file("bar_menu.txt");
     if (!file.is_open()) {
         cerr << "Error: Unable to open file." << endl;
@@ -83,8 +83,8 @@ void loadBarFromFile(vector<shared_ptr<Bar>>& barMenu) {
     }
 }
 
-void saveLuxuryBarToFile(const vector<shared_ptr<LuxuryBar>>& luxuryBarMenu) {
-    ofstream file("luxury_bar_menu.txt", ios::app);
+void saveLuxuryBarToFile(const vector<unique_ptr<LuxuryBar>>& luxuryBarMenu, ofstream::openmode state) {
+    ofstream file("luxury_bar_menu.txt", state);
     if (!file.is_open()) {
         cerr << "Error: Unable to open file." << endl;
         return;
@@ -94,7 +94,7 @@ void saveLuxuryBarToFile(const vector<shared_ptr<LuxuryBar>>& luxuryBarMenu) {
     }
 }
 
-void loadLuxuryBarFromFile(vector<shared_ptr<LuxuryBar>>& luxuryBarMenu) {
+void loadLuxuryBarFromFile(vector<unique_ptr<LuxuryBar>>& luxuryBarMenu) {
     ifstream file("luxury_bar_menu.txt");
     if (!file.is_open()) {
         cerr << "Error: Unable to open file." << endl;
@@ -110,10 +110,10 @@ void loadLuxuryBarFromFile(vector<shared_ptr<LuxuryBar>>& luxuryBarMenu) {
 }
 
 int main() {
-    vector<shared_ptr<Menu>> menu;
-    vector<shared_ptr<HealthyMenu>> healthyMenu;
-    vector<shared_ptr<Bar>> barMenu;
-    vector<shared_ptr<LuxuryBar>> luxuryBarMenu;
+    vector<unique_ptr<Menu>> menu;
+    vector<unique_ptr<HealthyMenu>> healthyMenu;
+    vector<unique_ptr<Bar>> barMenu;
+    vector<unique_ptr<LuxuryBar>> luxuryBarMenu;
     Menu menu_obj;
     HealthyMenu healthyMenu_obj;
     Bar bar_obj;
@@ -129,13 +129,13 @@ int main() {
         cin >> password;
         if (password == "admin123") {
             cout << "Admin logged in.\n";
-            cout << "1. Display Menu\n";
+            cout << "1. Change menu item\n";
             cout << "2. Add dish\n";
-            cout << "3. Display Healthy Menu\n";
+            cout << "3. Change healthy menu item\n";
             cout << "4. Add healthy dish\n";
-            cout << "5. Display Bar\n";
+            cout << "5. Change bar\n";
             cout << "6. Add cocktail\n";
-            cout << "7. Display Luxury Bar\n";
+            cout << "7. Change luxury bar\n";
             cout << "8. Add luxury drink\n";
             cout << "9. Exit\n";
             cout << "Enter your choice: ";
@@ -150,41 +150,49 @@ int main() {
                 case 1: {
                     loadMenuFromFile(menu);
                     menu_obj.displayMenu(menu);
+                    Menu::changeMenuItem(menu);
+                    saveMenuToFile(menu, ofstream::out);
                     break;
                 }
                 case 2 : {
                     menu_obj.addMenuItem(menu);
-                    saveMenuToFile(menu);
+                    saveMenuToFile(menu, ofstream::app);
                     break;
                 }
                 case 3: {
                     loadHealthyMenuFromFile(healthyMenu);
                     healthyMenu_obj.displayHealthyMenu(healthyMenu);
+                    HealthyMenu::changeHealthyMenuItem(healthyMenu);
+                    saveHealthyMenuToFile(healthyMenu, ofstream::out);
                     break;
                 }
                 case 4: {
                     healthyMenu_obj.addHealthyMenuItem(healthyMenu);
-                    saveHealthyMenuToFile(healthyMenu);
+                    saveHealthyMenuToFile(healthyMenu, ofstream::app);
                     break;
                 }
                 case 5: {
                     loadBarFromFile(barMenu);
                     bar_obj.displayBar(barMenu);
+                    Bar::changeBarItem(barMenu);
+                    saveBarToFile(barMenu, ofstream::out);
                     break;
                 }
                 case 6: {
                     bar_obj.addBarItem(barMenu);
-                    saveBarToFile(barMenu);
+                    saveBarToFile(barMenu, ofstream::app);
                     break;
                 }
                 case 7: {
                     loadLuxuryBarFromFile(luxuryBarMenu);
                     luxuryBar_obj.displayLuxuryBar(luxuryBarMenu);
+                    LuxuryBar::changeLuxuryBarItem(luxuryBarMenu);
+                    saveLuxuryBarToFile(luxuryBarMenu, ofstream::out);
                     break;
                 }
                 case 8: {
                     luxuryBar_obj.addLuxuryBarItem(luxuryBarMenu);
-                    saveLuxuryBarToFile(luxuryBarMenu);
+                    saveLuxuryBarToFile(luxuryBarMenu, ofstream::app);
                     break;
                 }
                 case 9:
